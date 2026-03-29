@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DWKsYYT10+8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaymes\\.nuget\\packages\\taglibsharp\\2.3.0\\taglibsharp.2.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
