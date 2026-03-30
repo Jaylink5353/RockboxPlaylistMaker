@@ -17,18 +17,18 @@ class Program
     static void indexFiles()
     {
         Console.WriteLine("Please put the path to the directory you want to search:");
-        string pathIn = Console.ReadLine();
+        string? pathIn = Console.ReadLine();
         if (!Directory.Exists(pathIn))
         {
             Console.WriteLine("Error: Not a valid path. Please try again.");
             Environment.Exit(1);
         }
-        string[] allowedExtentions = {".ogg", ".mp3", ".wav", ".flac"};
+        string[] allowedExtentions = { ".ogg", ".mp3", ".wav", ".flac" };
         string disallowedBegining = "._";
 
 
-        
-        var foundFiles = Directory.EnumerateFiles(pathIn, "*.*", SearchOption.AllDirectories) .Where(file => allowedExtentions.Contains(Path.GetExtension(file).ToLower()))
+
+        var foundFiles = Directory.EnumerateFiles(pathIn, "*.*", SearchOption.AllDirectories).Where(file => allowedExtentions.Contains(Path.GetExtension(file).ToLower()))
          .Where(file => !Path.GetFileName(file).StartsWith(disallowedBegining));
 
         foreach (var file in foundFiles)
@@ -36,7 +36,7 @@ class Program
             Console.WriteLine($"File Found: {file}");
             try
             {
-               getTag(file); 
+                getTag(file);
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ class Program
                     Environment.Exit(2);
                 }
             }
-            
+
         }
         return;
     }
@@ -60,13 +60,13 @@ class Program
     {
         var tagF = TagLib.File.Create(path);
 
-     
+
         var songEnter = new SongInfo(
-            Title:tagF.Tag.Title ?? "Unknown Title",
-            Artist:tagF.Tag.FirstPerformer ?? "Unknown Artist",
-            Album:tagF.Tag.Album ?? "Unknown Album",
-            path:path,
-            id:currentId++
+            Title: tagF.Tag.Title ?? "Unknown Title",
+            Artist: tagF.Tag.FirstPerformer ?? "Unknown Artist",
+            Album: tagF.Tag.Album ?? "Unknown Album",
+            path: path,
+            id: currentId++
         );
         SongDatabase.Add(songEnter);
         return;
@@ -75,17 +75,17 @@ class Program
     static void searchBy()
     {
         Console.WriteLine("Search By: (Ar for Artist, T for Title, Al for Album)");
-        string input = Console.ReadLine();
-        
+        string? input = Console.ReadLine();
+
         if (input == null)
         {
             Console.WriteLine("Please Input Something");
             Environment.Exit(1);
         }
-        if (input.Contains("Al"))
+        if (input.Contains("Al") && !input.Contains("Ar"))
         {
             Console.WriteLine("What Album?");
-            string alInpt = Console.ReadLine();
+            string? alInpt = Console.ReadLine();
             if (alInpt == null)
             {
                 Console.WriteLine("Please Input Something");
@@ -97,12 +97,53 @@ class Program
                 Console.WriteLine("No Results found");
                 return;
             }
-            
+
             foreach (var result in search)
             {
-                Console.WriteLine($"Title: {result.Title}. Artist: {result.Artist}. Album: {result.Album}.");
+                Console.WriteLine($"Title: {result.Title} | Artist: {result.Artist} | Album: {result.Album} |");
             }
-            
+
+        }
+        if (input.Contains("Ar") && !input.Contains("Al"))
+        {
+            Console.WriteLine("What Artist?");
+            string? arInpt = Console.ReadLine();
+            if (arInpt == null)
+            {
+                Console.WriteLine("Please Input Something");
+                Environment.Exit(1);
+            }
+            var search = (from SongInfo in SongDatabase where SongInfo.Artist.Contains(arInpt) select SongInfo).ToList();
+            if (search == null)
+            {
+                Console.WriteLine("No Results found");
+                return;
+            }
+
+            foreach (var result in search)
+            {
+                Console.WriteLine($"Title: {result.Title} | Artist: {result.Artist} | Album: {result.Album} |");
+            }
+        }
+        if (input.Contains("T") && !input.Contains("A"))
+        {
+            Console.WriteLine("What's the title of the song?");
+            string? tInpt = Console.ReadLine();
+            if (tInpt == null)
+            {
+                Console.WriteLine("Please Input Something");
+                Environment.Exit(1);
+            }
+            var search = (from SongInfo in SongDatabase where SongInfo.Title.Contains(tInpt) select SongInfo).ToList();
+            if (search == null)
+            {
+                Console.WriteLine("No Results found");
+                return;
+            }
+            foreach (var result in search)
+            {
+                Console.WriteLine($"Title: {result.Title} | Artist: {result.Artist} | Album: {result.Album}");
+            }
         }
     }
 

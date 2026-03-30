@@ -38,7 +38,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "taglibsharp >= 2.3.0"
+      "TagLibSharp >= 2.3.0"
     ]
   },
   "packageFolders": {
@@ -47,11 +47,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj",
+      "projectUniqueName": "C:\\Users\\jaygs\\Documents\\SongTagger\\SongTagger.csproj",
       "projectName": "SongTagger",
-      "projectPath": "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj",
+      "projectPath": "C:\\Users\\jaygs\\Documents\\SongTagger\\SongTagger.csproj",
       "packagesPath": "C:\\Users\\Jaymes\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jaymes\\Documents\\SongTagger\\obj\\",
+      "outputPath": "C:\\Users\\jaygs\\Documents\\SongTagger\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jaymes\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -86,7 +86,7 @@
       "net10.0": {
         "targetAlias": "net10.0",
         "dependencies": {
-          "taglibsharp": {
+          "TagLibSharp": {
             "target": "Package",
             "version": "[2.3.0, )"
           }

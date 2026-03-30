@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj": {}
+    "C:\\Users\\jaygs\\Documents\\SongTagger\\SongTagger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj": {
+    "C:\\Users\\jaygs\\Documents\\SongTagger\\SongTagger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj",
+        "projectUniqueName": "C:\\Users\\jaygs\\Documents\\SongTagger\\SongTagger.csproj",
         "projectName": "SongTagger",
-        "projectPath": "C:\\Users\\Jaymes\\Documents\\SongTagger\\SongTagger.csproj",
+        "projectPath": "C:\\Users\\jaygs\\Documents\\SongTagger\\SongTagger.csproj",
         "packagesPath": "C:\\Users\\Jaymes\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jaymes\\Documents\\SongTagger\\obj\\",
+        "outputPath": "C:\\Users\\jaygs\\Documents\\SongTagger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jaymes\\AppData\\Roaming\\NuGet\\NuGet.Config",
