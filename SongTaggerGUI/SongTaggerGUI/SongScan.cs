@@ -11,6 +11,7 @@ namespace tagIndex {
         public record SongInfo(string Title, string Artist, string Album, string path, int id);
         static public int currentId = 0;
         static public List<SongInfo> SongDatabase = new List<SongInfo>();
+        public static List<SongInfo> SearchResults = new List<SongInfo>();
 
         public static void indexFiles(string pathIn, IProgress<string>? progress = null)
         {;
@@ -59,81 +60,70 @@ namespace tagIndex {
             SongDatabase.Add(songEnter);
             return;
         }
-
-        static void searchBy()
+        static public bool searchDispatch(bool artist, bool album, bool title, string? artistString, string? albumString, string? titleString)
         {
-            Console.WriteLine("Search By: (Ar for Artist, T for Title, Al for Album)");
-            string? input = Console.ReadLine();
+            if (!artist && !album && !title)
+                return false;
 
-            if (input == null)
+            IEnumerable<SongInfo> query = SongDatabase;
+
+            if (artist && !string.IsNullOrWhiteSpace(artistString))
+                query = query.Where(s => s.Artist.Contains(artistString, StringComparison.OrdinalIgnoreCase));
+
+            if (album && !string.IsNullOrWhiteSpace(albumString))
+                query = query.Where(s => s.Album.Contains(albumString, StringComparison.OrdinalIgnoreCase));
+
+            if (title && !string.IsNullOrWhiteSpace(titleString))
+                query = query.Where(s => s.Title.Contains(titleString, StringComparison.OrdinalIgnoreCase));
+
+            SearchResults = query.DistinctBy(s => s.id).ToList();
+            return true;
+        }
+        static private void searchArtist(string? artist)
+        {
+            if (artist.IsWhiteSpace()| artist == null)
             {
-                Console.WriteLine("Please Input Something");
-                Environment.Exit(1);
+                return;
             }
-            if (input.Contains("Al") && !input.Contains("Ar"))
+            else
             {
-                Console.WriteLine("What Album?");
-                string? alInpt = Console.ReadLine();
-                if (alInpt == null)
-                {
-                    Console.WriteLine("Please Input Something");
-                    Environment.Exit(1);
-                }
-                var search = (from SongInfo in SongDatabase where SongInfo.Album.Contains(alInpt) select SongInfo).ToList();
-                if (search == null)
-                {
-                    Console.WriteLine("No Results found");
-                    return;
-                }
-
+                var search = (from SongInfo in SongDatabase where SongInfo.Artist.Contains(artist) select SongInfo).ToList();
                 foreach (var result in search)
                 {
-                    Console.WriteLine($"Title: {result.Title} | Artist: {result.Artist} | Album: {result.Album} |");
-                }
-
-            }
-            if (input.Contains("Ar") && !input.Contains("Al"))
-            {
-                Console.WriteLine("What Artist?");
-                string? arInpt = Console.ReadLine();
-                if (arInpt == null)
-                {
-                    Console.WriteLine("Please Input Something");
-                    Environment.Exit(1);
-                }
-                var search = (from SongInfo in SongDatabase where SongInfo.Artist.Contains(arInpt) select SongInfo).ToList();
-                if (search == null)
-                {
-                    Console.WriteLine("No Results found");
-                    return;
-                }
-
-                foreach (var result in search)
-                {
-                    Console.WriteLine($"Title: {result.Title} | Artist: {result.Artist} | Album: {result.Album} |");
-                }
-            }
-            if (input.Contains("T") && !input.Contains("A"))
-            {
-                Console.WriteLine("What's the title of the song?");
-                string? tInpt = Console.ReadLine();
-                if (tInpt == null)
-                {
-                    Console.WriteLine("Please Input Something");
-                    Environment.Exit(1);
-                }
-                var search = (from SongInfo in SongDatabase where SongInfo.Title.Contains(tInpt) select SongInfo).ToList();
-                if (search == null)
-                {
-                    Console.WriteLine("No Results found");
-                    return;
-                }
-                foreach (var result in search)
-                {
-                    Console.WriteLine($"Title: {result.Title} | Artist: {result.Artist} | Album: {result.Album}");
+                    SearchResults.Add(result);
                 }
             }
         }
-
+        static private void searchAlbum(string album)
+        {
+            if (album.IsWhiteSpace() || album == null)
+            {
+                return;
+            }
+            else
+            {
+                var search = (from SongInfo in SongDatabase where SongInfo.Album.Contains(album) select SongInfo).ToList();
+                foreach (var result in search)
+                {
+                    SearchResults.Add(result);
+                }
+            }
+        }
+        static private void searchTitle(string title)
+        {
+            if (title.IsWhiteSpace() || title == null)
+            {
+                return;
+            }
+            else
+            {
+                var search = (from SongInfo in SongDatabase where SongInfo.Title.Contains(title) select SongInfo).ToList();
+                foreach (var result in search)
+                {
+                    SearchResults.Add(result);
+                }
+            }
+        }
+        
     }
 }

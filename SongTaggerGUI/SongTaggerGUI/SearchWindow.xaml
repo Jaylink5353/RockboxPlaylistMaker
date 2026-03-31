@@ -1,0 +1,22 @@
+﻿<Window x:Class="SongTaggerGUI.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SongTaggerGUI"
+        mc:Ignorable="d"
+        Title="SearchWindow" Height="250" Width="350">
+    <Grid>
+        <CheckBox x:Name="albumCheck" Content="Album" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="82" Margin="58,10,0,0" Checked="albumCheck_Checked" Unchecked="albumCheck_Unchecked"/>
+        <CheckBox x:Name="artistCheck" Content="Artist" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="82" Margin="132,10,0,0" Checked="artistCheck_Checked" Unchecked="artistCheck_Unchecked"/>
+        <CheckBox x:Name="titleCheck" Content="Title" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="57" Margin="200,10,0,0" Checked="titleCheck_Checked" Unchecked="titleCheck_Unchecked"/>
+        <TextBox x:Name="albumBox" HorizontalAlignment="Left" Height="31" Margin="123,62,0,0" TextWrapping="Wrap" Text="Album" VerticalAlignment="Top" Width="210" IsEnabled="False"/>
+        <TextBox x:Name="artistBox" HorizontalAlignment="Left" Height="31" Margin="123,98,0,0" TextWrapping="Wrap" Text="Artist Name" VerticalAlignment="Top" Width="210" IsEnabled="False"/>
+        <TextBox x:Name="titleBox" HorizontalAlignment="Left" Height="31" Margin="123,134,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="210" IsEnabled="False"/>
+        <Label Content="Album Name:" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="138" Margin="10,58,0,0"/>
+        <Label Content="Artist Name:" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="138" Margin="10,93,0,0"/>
+        <Label Content="Song Title:" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="138" Margin="10,130,0,0"/>
+        <Button Content="Search" HorizontalAlignment="Left" Height="40" Margin="87,178,0,0" VerticalAlignment="Top" Width="149" Click="search_Click"/>
+
+    </Grid>
+</Window>

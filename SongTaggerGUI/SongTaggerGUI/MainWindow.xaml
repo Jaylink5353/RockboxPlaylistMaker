@@ -8,8 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-        <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="47" Margin="36,31,0,0" VerticalAlignment="Top" Width="212" Click="dirButton_Click"/>
-        <DataGrid x:Name="songDataGrid" Margin="311,54,63,72" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged"/>
+        <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="24" Margin="10,342,0,0" VerticalAlignment="Top" Width="130" Click="dirButton_Click"/>
+        <DataGrid x:Name="songDataGrid" Margin="10,10,10,119" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="24" Margin="195,342,0,0" VerticalAlignment="Top" Width="139" Click="SearchButton_Click"/>
+        <Button x:Name="clrSearchButton" Content="Clear Search" HorizontalAlignment="Left" Height="24" Margin="384,342,0,0" VerticalAlignment="Top" Width="149" Click="clrButton_Click"/>
         <Grid x:Name="LoadingOverlay" Background="#AF000000" Visibility="Collapsed" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ProgressBar IsIndeterminate="True" Width="165" Height="20"/>

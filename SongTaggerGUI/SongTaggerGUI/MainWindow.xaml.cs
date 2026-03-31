@@ -57,6 +57,7 @@ namespace SongTaggerGUI
         private void getSongDatabase()
         {
             var LocalDatabase = songDatabaseManager.SongDatabase;
+            
             songDataGrid.ItemsSource = LocalDatabase;
         }
 
@@ -68,6 +69,22 @@ namespace SongTaggerGUI
         {
             LoadingCurrentFileTxt.Text = $"Current File: {input}";
         }
-    }
 
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchWindow searchWindow = new SearchWindow();
+            searchWindow.Owner = this;
+            searchWindow.Show();
+        }
+
+        private void clrButton_Click(object sender, RoutedEventArgs e)
+        {
+            getSongDatabase();
+        }
+        public void showSearchResults()
+        {
+            var localSearch = tagIndex.songDatabaseManager.SearchResults;
+            songDataGrid.ItemsSource = localSearch;
+        }
+    }
 }
