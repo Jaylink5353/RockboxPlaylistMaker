@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SongTaggerGUI"
         mc:Ignorable="d"
-        Title="SearchWindow" Height="250" Width="350">
+        ResizeMode="NoResize"
+        Title="SearchWindow" Height="300" Width="375">
     <Grid>
         <CheckBox x:Name="albumCheck" Content="Album" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="82" Margin="58,10,0,0" Checked="albumCheck_Checked" Unchecked="albumCheck_Unchecked"/>
         <CheckBox x:Name="artistCheck" Content="Artist" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="82" Margin="132,10,0,0" Checked="artistCheck_Checked" Unchecked="artistCheck_Unchecked"/>
@@ -16,7 +17,7 @@
         <Label Content="Album Name:" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="138" Margin="10,58,0,0"/>
         <Label Content="Artist Name:" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="138" Margin="10,93,0,0"/>
         <Label Content="Song Title:" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="138" Margin="10,130,0,0"/>
-        <Button Content="Search" HorizontalAlignment="Left" Height="40" Margin="87,178,0,0" VerticalAlignment="Top" Width="149" Click="search_Click"/>
+        <Button Content="Search" HorizontalAlignment="Left" Height="40" Margin="98,203,0,0" VerticalAlignment="Top" Width="150" Click="search_Click"/>
 
     </Grid>
 </Window>
