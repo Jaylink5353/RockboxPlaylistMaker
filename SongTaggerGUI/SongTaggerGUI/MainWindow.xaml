@@ -1,0 +1,22 @@
+﻿<Window x:Class="SongTaggerGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SongTaggerGUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="47" Margin="36,31,0,0" VerticalAlignment="Top" Width="212" Click="dirButton_Click"/>
+        <DataGrid x:Name="songDataGrid" Margin="311,54,63,72" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged"/>
+        <Grid x:Name="LoadingOverlay" Background="#AF000000" Visibility="Collapsed" >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" Width="165" Height="20"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" Width="69" Text="Indexing...."/>
+            </StackPanel>
+            <TextBox x:Name="LoadingCurrentFileTxt" IsReadOnly ="True" HorizontalAlignment="Left" Height="20" Margin="144,286,0,0" TextWrapping="Wrap" Text="Current File: X" VerticalAlignment="Top" Width="523" Background="#FF707070" Foreground="White" TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+
+</Window>
