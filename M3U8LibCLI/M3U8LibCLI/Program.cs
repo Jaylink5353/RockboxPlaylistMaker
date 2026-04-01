@@ -11,7 +11,8 @@ namespace m3u8Manager
         {
             SongDatabase.Add("/Music/Music/Music/song!");
             SongDatabase.Add("musicPath2?");
-            checkFile(@"C:\Users\Jaymes\Desktop\testPlaylist.m3u8");
+            convertPath(@"C:\Song");
+            // checkFile(@"C:\Users\Jaymes\Desktop\testPlaylist.m3u8");
         }
 
         static public void checkFile(string path)
@@ -27,6 +28,22 @@ namespace m3u8Manager
                     sw.WriteLine(result);
                 }
             }
+        }
+
+        static public string convertPath(string inputPath)
+        {
+            string pathRoot = Path.GetPathRoot(inputPath) ?? "";
+
+            // Strip the drive root (e.g. "E:\")
+            string stripped = pathRoot.Length > 0
+                ? inputPath.Substring(pathRoot.Length)
+                : inputPath;
+
+            // Replace backslashes and prepend "/"
+            string rockboxPath = "/" + stripped.Replace('\\', '/');
+
+            Console.WriteLine(rockboxPath);
+            return rockboxPath;
         }
     }
 }
