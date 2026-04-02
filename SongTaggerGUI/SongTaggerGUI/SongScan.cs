@@ -8,7 +8,7 @@ using SongTaggerGUI;
 namespace tagIndex { 
     public class songDatabaseManager
     {
-        public record SongInfo(string Title, string Artist, string Album, string path, int id);
+        public record SongInfo(string Title, string Artist, string Album, string path,TimeSpan duration, int id);
         static public int currentId = 0;
         static public List<SongInfo> SongDatabase = new List<SongInfo>();
         public static List<SongInfo> SearchResults = new List<SongInfo>();
@@ -49,12 +49,12 @@ namespace tagIndex {
         {
             var tagF = TagLib.File.Create(path);
 
-
             var songEnter = new SongInfo(
                 Title: tagF.Tag.Title ?? "Unknown Title",
                 Artist: tagF.Tag.FirstPerformer ?? "Unknown Artist",
                 Album: tagF.Tag.Album ?? "Unknown Album",
                 path: path,
+                duration: tagF.Properties.Duration,
                 id: currentId++
             );
             SongDatabase.Add(songEnter);

@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using tagIndex;
+using dbMgmt;
+using m3u8Manager;
 using Microsoft.Win32;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -20,10 +22,10 @@ namespace SongTaggerGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         private async void dirButton_Click(object sender, RoutedEventArgs e)
@@ -56,15 +58,49 @@ namespace SongTaggerGUI
         }
         private void getSongDatabase()
         {
+            dbMgmt.Program.localDbDisp.Clear();
             var LocalDatabase = songDatabaseManager.SongDatabase;
             
-            songDataGrid.ItemsSource = LocalDatabase;
+            foreach (var result in songDatabaseManager.SongDatabase)
+            {
+                var enter = new dbMgmt.Program.SongInfoDisp(
+                   Title: result.Title,
+                   Artist: result.Artist,
+                   Album: result.Album,
+                   path: result.path,
+                   duration: result.duration,
+                   id: result.id,
+                   isSelected: false
+                );
+
+                dbMgmt.Program.localDbDisp.Add(enter);
+            }
+            songDataGrid.ItemsSource = dbMgmt.Program.localDbDisp;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+
+        private void makeButton_Click(object sender, EventArgs e)
+        {
+            m3u8Manager.Program.runFileMake();
+        }
+        private void DataGrid_EditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction != DataGridEditAction.Commit)
+                return;
+
+            if (e.Row.Item is not dbMgmt.Program.SongInfoDisp song)
+                return;
+
+            if (e.Column is DataGridCheckBoxColumn && e.EditingElement is CheckBox cb)
+            {
+                dbMgmt.Program.updateIsSelected(song.id, cb.IsChecked == true);
+            }
+        }
+       
         public void SetCurrentSong(string input)
         {
             LoadingCurrentFileTxt.Text = $"Current File: {input}";
@@ -87,4 +123,6 @@ namespace SongTaggerGUI
             songDataGrid.ItemsSource = localSearch;
         }
     }
+
+
 }

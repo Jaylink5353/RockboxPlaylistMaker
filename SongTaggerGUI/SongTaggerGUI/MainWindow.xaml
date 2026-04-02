@@ -9,9 +9,25 @@
     <Grid>
 
         <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="24" Margin="10,342,0,0" VerticalAlignment="Top" Width="130" Click="dirButton_Click"/>
-        <DataGrid x:Name="songDataGrid" Margin="10,10,10,119" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged"/>
         <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="24" Margin="195,342,0,0" VerticalAlignment="Top" Width="139" Click="SearchButton_Click"/>
         <Button x:Name="clrSearchButton" Content="Clear Search" HorizontalAlignment="Left" Height="24" Margin="384,342,0,0" VerticalAlignment="Top" Width="149" Click="clrButton_Click"/>
+        <DataGrid x:Name="songDataGrid"
+                  Margin="10,10,10,119"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Extended"
+                  FrozenColumnCount="1"
+                  CellEditEnding="DataGrid_EditEnding">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Select"
+                                        Binding="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Width="70" />
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Album" Binding="{Binding Album}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="120" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Grid x:Name="LoadingOverlay" Background="#AF000000" Visibility="Collapsed" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ProgressBar IsIndeterminate="True" Width="165" Height="20"/>
@@ -19,6 +35,9 @@
             </StackPanel>
             <TextBox x:Name="LoadingCurrentFileTxt" IsReadOnly ="True" HorizontalAlignment="Left" Height="20" Margin="144,286,0,0" TextWrapping="Wrap" Text="Current File: X" VerticalAlignment="Top" Width="523" Background="#FF707070" Foreground="White" TextAlignment="Center"/>
         </Grid>
+        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="24" Margin="573,342,0,0" VerticalAlignment="Top" Width="145" Click="makeButton_Click"/>
+
+
     </Grid>
 
 </Window>
