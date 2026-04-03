@@ -16,12 +16,16 @@
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   SelectionMode="Extended"
-                  FrozenColumnCount="1"
-                  CellEditEnding="DataGrid_EditEnding">
+                  FrozenColumnCount="1">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Select"
-                                        Binding="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        Width="70" />
+                <DataGridTemplateColumn Header="Selected">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding isSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      HorizontalAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Album" Binding="{Binding Album}" Width="*" IsReadOnly="True"/>

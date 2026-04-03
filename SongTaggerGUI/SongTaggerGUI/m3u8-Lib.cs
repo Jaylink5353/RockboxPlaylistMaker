@@ -15,7 +15,7 @@ namespace m3u8Manager
         static private string tempPath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\test.m3u8";
         public void reload()
         {
-            foreach (var result in dbMgmt.Program.localDbDisp)
+            foreach (var result in dbMgmt.Functions.localDbDisp)
             {
                 var enter = new selectedSongType(
                     path: (convertPath(result.path)),
@@ -55,7 +55,8 @@ namespace m3u8Manager
         static public void runFileMake()
         {
             initFile(tempPath);
-            foreach (var result in dbMgmt.Program.localDbDisp)
+            idSongDatabase.Clear();
+            foreach (var result in dbMgmt.Functions.localDbDisp)
             {
                 if (result.isSelected == true)
                 {

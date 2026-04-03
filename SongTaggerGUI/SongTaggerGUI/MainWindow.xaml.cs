@@ -22,7 +22,7 @@ namespace SongTaggerGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private record isSelectedBcp(int id, bool isSelected);
         public MainWindow()
         {
             InitializeComponent();
@@ -58,24 +58,28 @@ namespace SongTaggerGUI
         }
         private void getSongDatabase()
         {
-            dbMgmt.Program.localDbDisp.Clear();
-            var LocalDatabase = songDatabaseManager.SongDatabase;
-            
+            // Backup current selection state
+            var selectionBackup = dbMgmt.Functions.localDbDisp
+                .ToDictionary(x => x.id, x => x.isSelected);
+
+            dbMgmt.Functions.localDbDisp.Clear();
+
             foreach (var result in songDatabaseManager.SongDatabase)
             {
-                var enter = new dbMgmt.Program.SongInfoDisp(
-                   Title: result.Title,
-                   Artist: result.Artist,
-                   Album: result.Album,
-                   path: result.path,
-                   duration: result.duration,
-                   id: result.id,
-                   isSelected: false
-                );
+                var enter = new dbMgmt.SongInfoDisp
+                {
+                    Title = result.Title,
+                    Artist = result.Artist,
+                    path = result.path,
+                    duration = result.duration,
+                    id = result.id,
+                    isSelected = selectionBackup.TryGetValue(result.id, out var selected) && selected
+                };
 
-                dbMgmt.Program.localDbDisp.Add(enter);
+                dbMgmt.Functions.localDbDisp.Add(enter);
             }
-            songDataGrid.ItemsSource = dbMgmt.Program.localDbDisp;
+
+            songDataGrid.ItemsSource = dbMgmt.Functions.localDbDisp;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,25 +91,19 @@ namespace SongTaggerGUI
         {
             m3u8Manager.Program.runFileMake();
         }
-        private void DataGrid_EditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            if (e.EditAction != DataGridEditAction.Commit)
-                return;
 
-            if (e.Row.Item is not dbMgmt.Program.SongInfoDisp song)
-                return;
-
-            if (e.Column is DataGridCheckBoxColumn && e.EditingElement is CheckBox cb)
-            {
-                dbMgmt.Program.updateIsSelected(song.id, cb.IsChecked == true);
-            }
-        }
        
         public void SetCurrentSong(string input)
         {
             LoadingCurrentFileTxt.Text = $"Current File: {input}";
         }
 
+        static public void updateIsSelected(int id, bool isSelect)
+        {
+            var item = dbMgmt.Functions.localDbDisp.FirstOrDefault(x => x.id == id);
+            if (item != null)
+                item.isSelected = isSelect;
+        }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             SearchWindow searchWindow = new SearchWindow();
@@ -119,8 +117,12 @@ namespace SongTaggerGUI
         }
         public void showSearchResults()
         {
-            var localSearch = tagIndex.songDatabaseManager.SearchResults;
-            songDataGrid.ItemsSource = localSearch;
+            var resultIds = tagIndex.songDatabaseManager.SearchResults
+                        .Select(s => s.id)
+                        .ToHashSet();
+            songDataGrid.ItemsSource = dbMgmt.Functions.localDbDisp
+                                             .Where(d => resultIds.Contains(d.id))
+                                             .ToList();
         }
     }
 
