@@ -39,7 +39,7 @@
             </StackPanel>
             <TextBox x:Name="LoadingCurrentFileTxt" IsReadOnly ="True" HorizontalAlignment="Left" Height="20" Margin="144,286,0,0" TextWrapping="Wrap" Text="Current File: X" VerticalAlignment="Top" Width="523" Background="#FF707070" Foreground="White" TextAlignment="Center"/>
         </Grid>
-        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="24" Margin="573,342,0,0" VerticalAlignment="Top" Width="145" Click="makeButton_Click"/>
+        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="24" Margin="573,342,0,0" VerticalAlignment="Top" Width="145" Click="makeFile"/>
 
 
     </Grid>

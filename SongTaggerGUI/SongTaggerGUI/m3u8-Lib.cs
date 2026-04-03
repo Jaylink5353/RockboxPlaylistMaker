@@ -30,21 +30,21 @@ namespace m3u8Manager
             }
         }
 
-        static private void initFile(string path)
-        {
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                sw.Write("#EXITMCU");
-                sw.Write(Environment.NewLine);
-            }
-        }
 
         static private void checkFile(string inPath)
         {
             using (StreamWriter sw = new StreamWriter(inPath))
             {
+                int current = 0;
+                sw.Write("#EXITMCU");
+                sw.Write(Environment.NewLine);
                 foreach (var result in idSongDatabase.Where(s => s.isSelected))
                 {
+                    current++;
+                    if (current < 1)
+                    {
+
+                    }
                     sw.Write("\n");
                     sw.Write($"#EXTINF:{result.duration.TotalSeconds},{result.artist} - {result.title}");
                     sw.Write(Environment.NewLine);
@@ -52,9 +52,8 @@ namespace m3u8Manager
                 }
             }
         }
-        static public void runFileMake()
+        static public void runFileMake(string path)
         {
-            initFile(tempPath);
             idSongDatabase.Clear();
             foreach (var result in dbMgmt.Functions.localDbDisp)
             {
@@ -72,7 +71,7 @@ namespace m3u8Manager
                 }
             }
 
-            checkFile(tempPath);
+            checkFile(path);
             
         }
         static public string convertPath(string inputPath)

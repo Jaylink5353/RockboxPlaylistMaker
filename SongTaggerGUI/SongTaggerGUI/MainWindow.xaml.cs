@@ -87,11 +87,6 @@ namespace SongTaggerGUI
 
         }
 
-        private void makeButton_Click(object sender, EventArgs e)
-        {
-            m3u8Manager.Program.runFileMake();
-        }
-
        
         public void SetCurrentSong(string input)
         {
@@ -123,6 +118,20 @@ namespace SongTaggerGUI
             songDataGrid.ItemsSource = dbMgmt.Functions.localDbDisp
                                              .Where(d => resultIds.Contains(d.id))
                                              .ToList();
+        }
+
+        private void makeFile(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDiag = new SaveFileDialog();
+            saveDiag.Filter = ".m3u8|.m3u8";
+
+            bool? result = saveDiag.ShowDialog();
+
+            if (result == true)
+            {
+                string path = saveDiag.FileName;
+                m3u8Manager.Program.runFileMake(path);
+            }
         }
     }
 
