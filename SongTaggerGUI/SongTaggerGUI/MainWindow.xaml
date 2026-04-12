@@ -32,14 +32,15 @@
                 <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="120" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="40" Margin="573,342,0,0" VerticalAlignment="Top" Width="145" Click="makeFile"/>
+
         <Grid x:Name="LoadingOverlay" Background="#AF000000" Visibility="Collapsed" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ProgressBar IsIndeterminate="True" Width="165" Height="20"/>
+                <ProgressBar IsIndeterminate="True" Width="165" Height="20" BorderBrush="White" Background="#AFE8E8E8"/>
                 <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" Width="69" Text="Indexing...."/>
             </StackPanel>
             <TextBox x:Name="LoadingCurrentFileTxt" IsReadOnly ="True" HorizontalAlignment="Left" Height="20" Margin="144,286,0,0" TextWrapping="Wrap" Text="Current File: X" VerticalAlignment="Top" Width="523" Background="#FF707070" Foreground="White" TextAlignment="Center"/>
         </Grid>
-        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="40" Margin="573,342,0,0" VerticalAlignment="Top" Width="145" Click="makeFile"/>
 
 
     </Grid>
