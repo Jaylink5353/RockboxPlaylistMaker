@@ -40,3 +40,4 @@
 *.vsdps 
 *.testrunconfig 
 *.testsettings
+./SpotiFetchLib/senEnvVars.ps1
