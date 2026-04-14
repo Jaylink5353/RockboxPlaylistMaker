@@ -18,12 +18,13 @@ namespace SpotiFechLib
             bool IsLocal
         );
         readonly static private string spotClientId = Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_ID") ?? throw new Exception("ID NULL");
-        readonly static private string spotClientSecret = Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_SECRET") ?? throw new Exception("KEY NULL");
+        //readonly static private string spotClientSecret = Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_SECRET") ?? throw new Exception("KEY NULL");
         private static SpotifyClient? spotify;
         private List<TrackInfo> tracks = new List<TrackInfo>();
         FullPlaylist? playlist;
         static async Task Main(string[] args)
         {
+            Console.WriteLine(spotClientId);
             await Auth();
             var playlistId = await getPlaylistID(args);
 
@@ -35,12 +36,53 @@ namespace SpotiFechLib
 
         static async Task Auth()
         {
-            var config = SpotifyClientConfig
-                .CreateDefault()
-                .WithAuthenticator(new ClientCredentialsAuthenticator(spotClientId, spotClientSecret));
+            var (verifier, challenge) = PKCEUtil.GenerateCodes();
 
-            spotify = new SpotifyClient(config);
-            
+            var tcs = new TaskCompletionSource<string>();
+            var http = new System.Net.HttpListener();
+
+            http.Prefixes.Add("http://127.0.0.1:5000/callback/");
+            http.Start();
+
+            _ = Task.Run(async () =>
+            {
+                var context = await http.GetContextAsync();
+                var code = context.Request.QueryString["code"] ?? "";
+                var response = context.Response;
+                string responseText = "<html><body>Authentication Successful</body></html>";
+                var buffer = System.Text.Encoding.UTF8.GetBytes(responseText);
+                response.ContentLength64 = buffer.Length;
+                await response.OutputStream.WriteAsync(buffer);
+                response.OutputStream.Close();
+                http.Stop();
+                tcs.SetResult(code);
+            });
+
+            var loginRequest = new LoginRequest(
+                new Uri("http://127.0.0.1:5000/callback/"),
+                spotClientId,
+                LoginRequest.ResponseType.Code
+            )
+            {
+                CodeChallengeMethod = "S256",
+                CodeChallenge = challenge,
+                Scope = new[] { Scopes.PlaylistReadPrivate, Scopes.PlaylistReadCollaborative }
+            };
+
+            Console.WriteLine("Auth with Spotify...");
+
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo { FileName = loginRequest.ToUri().ToString(), UseShellExecute = true });
+
+            var code = await tcs.Task;
+
+            var tokenResponse = await new OAuthClient().RequestToken(
+                new PKCETokenRequest(spotClientId, code, new Uri("http://127.0.0.1:5000/callback/"), verifier)
+            );
+
+            spotify = new SpotifyClient(tokenResponse.AccessToken);
+
+
+
         }
 
         static Task<string> getPlaylistID(string[] input)
