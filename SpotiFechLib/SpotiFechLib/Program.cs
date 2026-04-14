@@ -18,13 +18,11 @@ namespace SpotiFechLib
             bool IsLocal
         );
         readonly static private string spotClientId = Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_ID") ?? throw new Exception("ID NULL");
-        //readonly static private string spotClientSecret = Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_SECRET") ?? throw new Exception("KEY NULL");
         private static SpotifyClient? spotify;
         private List<TrackInfo> tracks = new List<TrackInfo>();
         FullPlaylist? playlist;
         static async Task Main(string[] args)
         {
-            Console.WriteLine(spotClientId);
             await Auth();
             var playlistId = await getPlaylistID(args);
 
@@ -149,10 +147,6 @@ namespace SpotiFechLib
             await foreach (var result in spotify.Paginate(firstPage))
             {
                 var playable = result.Track ?? result.Item;
-
-                Console.WriteLine(
-                    $"Track null: {result.Track == null}, Item null: {result.Item == null}, IsLocal: {result.IsLocal}, AddedAt: {result.AddedAt}, AddedBy: {result.AddedBy?.Id}"
-                );
 
                 if (playable is FullTrack track)
                 {
