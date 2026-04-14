@@ -132,7 +132,11 @@ namespace SpotiFechLib
             
             try
             {
-                firstPage = await spotify.Playlists.GetPlaylistItems(id);
+                firstPage = await spotify.Playlists.GetPlaylistItems(id, new PlaylistGetItemsRequest
+                {
+                    Market = "from_token"
+                });
+                //firstPage = await spotify.Playlists.GetPlaylistItems(id);
             }
             catch (APIException ex) { Console.WriteLine(ex); };
             
@@ -144,19 +148,23 @@ namespace SpotiFechLib
 
             await foreach (var result in spotify.Paginate(firstPage))
             {
-                if (result.Track is FullTrack track)
+                var playable = result.Track ?? result.Item;
+
+                Console.WriteLine(
+                    $"Track null: {result.Track == null}, Item null: {result.Item == null}, IsLocal: {result.IsLocal}, AddedAt: {result.AddedAt}, AddedBy: {result.AddedBy?.Id}"
+                );
+
+                if (playable is FullTrack track)
                 {
                     tracks.Add(new TrackInfo(
-                    
                         position: tracks.Count + 1,
                         title: track.Name,
-                        artists: string.Join(", ", track.Artists.ConvertAll( a => a.Name)),
+                        artists: string.Join(", ", track.Artists.ConvertAll(a => a.Name)),
                         album: track.Album.Name,
                         IsLocal: track.IsLocal
                     ));
                 }
-
-                else if (result.Track is FullEpisode episode)
+                else if (playable is FullEpisode)
                 {
                     Console.WriteLine("This playlist contains a podcast. Don't use these lol");
                     return;
