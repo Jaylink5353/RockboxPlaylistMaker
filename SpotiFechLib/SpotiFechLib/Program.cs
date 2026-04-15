@@ -17,12 +17,13 @@ namespace SpotiFechLib
             string artists,
             bool IsLocal
         );
-        readonly static private string spotClientId = Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_ID") ?? throw new Exception("ID NULL");
+        readonly static public string spotClientId = APIStore.readFile() ?? APIStore.collectApiKey();
         private static SpotifyClient? spotify;
         private List<TrackInfo> tracks = new List<TrackInfo>();
         FullPlaylist? playlist;
         static async Task Main(string[] args)
         {
+
             await Auth();
             var playlistId = await getPlaylistID(args);
 
@@ -30,6 +31,7 @@ namespace SpotiFechLib
             await app.fetchMetadata(playlistId);
             await app.fetchSongs(playlistId);
             app.displayResults();
+            APIStore.writeFile(spotClientId);
         }
 
         static async Task Auth()
