@@ -14,7 +14,6 @@ namespace SpotiFechLib
 
         static public void writeFile(string keyIn)
         {
-            Console.WriteLine("writing");
             string configDir = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                 ".config"
@@ -44,7 +43,6 @@ namespace SpotiFechLib
         }
         static public string? readFile()
         {
-            Console.WriteLine("reading");
             string configDir = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                 ".config"

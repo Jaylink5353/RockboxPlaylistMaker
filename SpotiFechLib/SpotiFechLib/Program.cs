@@ -87,11 +87,14 @@ namespace SpotiFechLib
 
         static Task<string> getPlaylistID(string[] input)
         {
-            string playlistId = input.Length > 0
-                ? parseURL(input[0])
-                : PromptForPlaylistId();
+            if (input.Length > 0 && !string.IsNullOrWhiteSpace(input[0]))
+            {
+                var fromArgs = parseURL(input[0]);
+                if (!string.IsNullOrWhiteSpace(fromArgs))
+                    return Task.FromResult(fromArgs);
+            }
 
-            return Task.FromResult(playlistId);
+            return Task.FromResult(PromptForPlaylistId());
         }
 
         private static string parseURL(string input)
@@ -103,6 +106,31 @@ namespace SpotiFechLib
                 return segs[^1];
             }
             return input.Trim();
+        }
+
+        private static string PromptForPlaylistId()
+        {
+            while (true)
+            {
+                Console.Write("Enter Spotify Playlist URL or ID: ");
+                var raw = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(raw))
+                {
+                    Console.WriteLine("Playlist URL/ID cannot be empty.");
+                    continue;
+                }
+
+                var parsed = parseURL(raw.Trim());
+
+                if (string.IsNullOrWhiteSpace(parsed))
+                {
+                    Console.WriteLine("Invalid playlist input. Try again.");
+                    continue;
+                }
+
+                return parsed;
+            }
         }
 
         private async Task fetchMetadata(string id)
@@ -118,10 +146,6 @@ namespace SpotiFechLib
                 Console.Error.WriteLine($"Could not fetch playlist: {ex.Message}");
                 throw;
             }
-        }
-        private static void prompt()
-        {
-            return;
         }
 
         private async Task fetchSongs(string id)
@@ -187,12 +211,6 @@ namespace SpotiFechLib
             Console.WriteLine();
             Console.WriteLine($"Tracks found: {tracks.Count}");
         }
-        private static string PromptForPlaylistId()
-        {
-            Console.Write("Enter Spotify Playlist URL or ID: ");
-            return parseURL(Console.ReadLine()?.Trim() ?? string.Empty);
-        }
-
         private static string Truncate(string value, int maxLength) =>
         value.Length <= maxLength ? value : value[..(maxLength - 1)] + "…";
     }
