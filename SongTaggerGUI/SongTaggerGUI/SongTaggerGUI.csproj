@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SpotifyAPI.Web" Version="7.4.2" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
   </ItemGroup>
 
