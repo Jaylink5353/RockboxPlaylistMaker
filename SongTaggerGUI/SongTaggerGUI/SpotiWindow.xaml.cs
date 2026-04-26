@@ -33,10 +33,7 @@ namespace SongTaggerGUI
                 //Make sure the API key is good before continuing
             }
         }
-        private async void auth()
-        {
-            await SpotiFechLib.SpotiLib.Auth();
-        }
+
 
         private async void fetchButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -48,9 +45,11 @@ namespace SongTaggerGUI
             {
                 localSpotiDb.Add(result);
             }
+            PlaylistInfo playlistInfo = new PlaylistInfo(localSpotiDb);
+            playlistInfo.Owner = this;
+            playlistInfo.Show();
             await selectPlaylistSongs();
-
-
+            LoadingOverlay.Visibility = Visibility.Collapsed;
         }
             
         public async Task selectPlaylistSongs()

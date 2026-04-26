@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotiFechLib;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,14 +18,15 @@ namespace SongTaggerGUI
     /// </summary>
     public partial class PlaylistInfo : Window
     {
-        public PlaylistInfo()
+        public PlaylistInfo(List<SpotiLib.TrackInfo> db)
         {
             InitializeComponent();
+            songDataGrid.ItemsSource = db;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

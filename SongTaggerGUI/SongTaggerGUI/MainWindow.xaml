@@ -9,7 +9,7 @@
     <Grid>
 
         <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="40" Margin="10,342,0,0" VerticalAlignment="Top" Width="138" Click="dirButton_Click"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="40" Margin="195,342,0,0" VerticalAlignment="Top" Width="139" Click="SearchButton_Click"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="40" Margin="195,342,0,0" VerticalAlignment="Top" Width="139" Click="openSpotiWindow"/>
         <Button x:Name="clrSearchButton" Content="Clear Search" HorizontalAlignment="Left" Height="40" Margin="384,342,0,0" VerticalAlignment="Top" Width="149" Click="clrButton_Click"/>
         <DataGrid x:Name="songDataGrid"
                   Margin="10,10,10,119"

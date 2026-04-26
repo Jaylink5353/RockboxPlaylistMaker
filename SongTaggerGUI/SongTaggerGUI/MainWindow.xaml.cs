@@ -87,6 +87,12 @@ namespace SongTaggerGUI
 
         }
 
+        private void openSpotiWindow(object sender, RoutedEventArgs e)
+        {
+            SpotiWindow spotiWindow = new SpotiWindow();
+            spotiWindow.Show();
+            this.Close();
+        }
        
         public void SetCurrentSong(string input)
         {
