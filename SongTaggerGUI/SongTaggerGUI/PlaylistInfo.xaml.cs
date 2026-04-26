@@ -18,10 +18,20 @@ namespace SongTaggerGUI
     /// </summary>
     public partial class PlaylistInfo : Window
     {
-        public PlaylistInfo(List<SpotiLib.TrackInfo> db)
+        bool Continue = false;
+        public PlaylistInfo(List<SpotiLib.TrackInfo> db, int mode)
         {
             InitializeComponent();
             songDataGrid.ItemsSource = db;
+            if (mode == 1)
+            {
+                TitleText.Text = "Your library is missing these songs:";
+            }
+        }
+
+        private async void dispPlaylist(List<SpotiLib.TrackInfo> db)
+        {
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

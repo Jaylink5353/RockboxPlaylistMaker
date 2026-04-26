@@ -8,7 +8,7 @@
         Title="PlaylistInfo" Height="450" Width="500
         ">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" TextWrapping="Wrap" Text="Playlist Fetched!" VerticalAlignment="Top" Width="121"/>
+        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Height="24" Margin="28,10,0,0" TextWrapping="Wrap" Text="Playlist Fetched!" VerticalAlignment="Top" Width="208" />
         <DataGrid x:Name="songDataGrid"
           Margin="24,56,25,99"
           AutoGenerateColumns="False"
@@ -16,10 +16,9 @@
           SelectionMode="Extended"
           FrozenColumnCount="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Album" Binding="{Binding Album}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="120" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding title}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Artist" Binding="{Binding artists}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Album" Binding="{Binding album}" Width="*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Continue" HorizontalAlignment="Left" Height="34" Margin="156,362,0,0" VerticalAlignment="Top" Width="161" Click="Button_Click"/>

@@ -23,6 +23,7 @@ namespace SongTaggerGUI
     public partial class SpotiWindow : Window
     {
         List<SpotiFechLib.SpotiLib.TrackInfo> localSpotiDb = new List<SpotiFechLib.SpotiLib.TrackInfo>();
+        List<SpotiFechLib.SpotiLib.TrackInfo> missingSongs = new List<SpotiFechLib.SpotiLib.TrackInfo>();
         bool readLocalLib = false;
         public SpotiWindow()
         {
@@ -45,10 +46,16 @@ namespace SongTaggerGUI
             {
                 localSpotiDb.Add(result);
             }
-            PlaylistInfo playlistInfo = new PlaylistInfo(localSpotiDb);
-            playlistInfo.Owner = this;
-            playlistInfo.Show();
+            var playlistInfo = new PlaylistInfo(localSpotiDb, 0) { Owner = this };
+            var dialog = playlistInfo.ShowDialog();
+            Activate();
+
             await selectPlaylistSongs();
+
+            var playlistInfo2 = new PlaylistInfo(localSpotiDb, 1) { Owner = this };
+            var dialog2 = playlistInfo2.ShowDialog();
+            Activate();
+
             LoadingOverlay.Visibility = Visibility.Collapsed;
         }
             
@@ -74,7 +81,7 @@ namespace SongTaggerGUI
                 }
                 if (!matched)
                 {
-                    MessageBox.Show($"Your song library doesn't Contain {spotiSong.title} by {spotiSong.artists}");
+                    missingSongs.Add(spotiSong);
                 }
             }
         }
