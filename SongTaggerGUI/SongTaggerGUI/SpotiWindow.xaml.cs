@@ -144,5 +144,23 @@ namespace SongTaggerGUI
             songDataGrid.ItemsSource = dbMgmt.Functions.localDbDisp;
         }
 
+        private void urlBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void makeFile(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDiag = new SaveFileDialog();
+            saveDiag.Filter = ".m3u8|.m3u8";
+
+            bool? result = saveDiag.ShowDialog();
+
+            if (result == true)
+            {
+                string path = saveDiag.FileName;
+                m3u8Manager.Program.runFileMake(path);
+            }
+        }
     }
 }

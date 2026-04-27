@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SongTaggerGUI"
         mc:Ignorable="d"
-        Title="SpotiWindow" Height="450" Width="600">
+        Title="SpotiWindow" Height="443" Width="668">
     <Grid>
-        <TextBox x:Name="urlBox"  HorizontalAlignment="Left" Height="29" Margin="29,98,0,0" TextWrapping="Wrap" Text="Playlist URL" VerticalAlignment="Top" Width="504"/>
+        <TextBox x:Name="urlBox"  HorizontalAlignment="Left" Height="29" Margin="29,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504"/>
         <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="40" Margin="29,341,0,0" VerticalAlignment="Top" Width="138" Click="dirButton_Click"/>
-        <Label Content="Playlist URL" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="85" Margin="26,68,0,0" RenderTransformOrigin="0.501,0.338"/>
+        <Label Content="Playlist URL" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="85" Margin="29,37,0,0" RenderTransformOrigin="0.501,0.338"/>
+        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="40" Margin="236,341,0,0" VerticalAlignment="Top" Width="145" Click="makeFile"/>
+
         <DataGrid x:Name="songDataGrid"
           Margin="29,172,20,110"
           AutoGenerateColumns="False"
@@ -31,7 +33,7 @@
                 <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="120" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Fetch Playlist" HorizontalAlignment="Left" Height="25" Margin="29,132,0,0" VerticalAlignment="Top" Width="100" Click="fetchButtonClicked"/>
+        <Button Content="Fetch Playlist" HorizontalAlignment="Left" Height="36" Margin="29,114,0,0" VerticalAlignment="Top" Width="110" Click="fetchButtonClicked"/>
         <Grid x:Name="LoadingOverlay" Background="#AF000000" Visibility="Collapsed" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ProgressBar IsIndeterminate="True" Width="165" Height="20" BorderBrush="White" Background="#AFE8E8E8"/>
