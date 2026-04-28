@@ -35,7 +35,13 @@ namespace SongTaggerGUI
             }
         }
 
-
+        private void returnNormal(object sender, RoutedEventArgs e) 
+        {
+            MainWindow mw = new MainWindow();
+            mw.Owner = this;
+            mw.Show();
+            this.Close();
+        }
         private async void fetchButtonClicked(object sender, RoutedEventArgs e)
         {
             LoadingOverlay.Visibility = Visibility.Visible;

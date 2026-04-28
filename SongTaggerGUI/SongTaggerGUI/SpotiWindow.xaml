@@ -41,6 +41,10 @@
             </StackPanel>
             <TextBox x:Name="LoadingCurrentFileTxt" IsReadOnly ="True" HorizontalAlignment="Center" Height="20" Margin="0,287,0,0" TextWrapping="Wrap" Text="Current File: X" VerticalAlignment="Top" Width="523" Background="#FF707070" Foreground="White" TextAlignment="Center"/>
         </Grid>
+        <Image HorizontalAlignment="Left" Height="40" Margin="476,10,0,0" VerticalAlignment="Top" Width="182"/>
+        <Image Margin="334,0,-466,71" Source="/Image2.png" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="72" Margin="576,10,0,0" VerticalAlignment="Top" Width="78" Source="/spotilogo.png"/>
+        <Button Content="Return" HorizontalAlignment="Left" Height="40" Margin="454,341,0,0" VerticalAlignment="Top" Width="158" Click="returnNormal"/>
     </Grid>
 
 </Window>

@@ -9,8 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="spotilogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SpotifyAPI.Web" Version="7.4.2" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="spotilogo.png" />
   </ItemGroup>
 
 </Project>
