@@ -55,6 +55,7 @@ namespace SongTaggerGUI
                     getSongDatabase();
                 }
             }
+            WelcomeText.Visibility = Visibility.Collapsed;
         }
         private void getSongDatabase()
         {

@@ -5,18 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SongTaggerGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        MinWidth="800" MinHeight="450">
+    <Grid VerticalAlignment="Bottom">
+        <Grid x:Name="ButonGid" Margin="4,2,0,10" HorizontalAlignment="Left" >
+            <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="40" Margin="10,329,0,32" VerticalAlignment="Top" Width="138" Click="dirButton_Click"/>
+            <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="40" Margin="168,329,0,0" VerticalAlignment="Top" Width="116" Click="SearchButton_Click"/>
+            <Button x:Name="clrSearchButton" Content="Clear Search" HorizontalAlignment="Left" Height="40" Margin="312,329,0,0" VerticalAlignment="Top" Width="115" Click="clrButton_Click"/>
+            <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="40" Margin="452,329,0,0" VerticalAlignment="Top" Width="145" Click="makeFile"/>
+            <Button Content="Spotify Mode" HorizontalAlignment="Left" Height="40" Margin="622,329,0,0" VerticalAlignment="Top" Width="153" Click="openSpotiWindow"/>
+        </Grid>
 
-        <Button x:Name="dirButton" Content="Select a Directory" HorizontalAlignment="Left" Height="40" Margin="10,342,0,0" VerticalAlignment="Top" Width="138" Click="dirButton_Click"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="40" Margin="168,342,0,0" VerticalAlignment="Top" Width="139" Click="SearchButton_Click"/>
-        <Button x:Name="clrSearchButton" Content="Clear Search" HorizontalAlignment="Center" Height="40" Margin="0,342,0,0" VerticalAlignment="Top" Width="149" Click="clrButton_Click"/>
         <DataGrid x:Name="songDataGrid"
                   Margin="10,10,10,119"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   SelectionMode="Extended"
-                  FrozenColumnCount="1">
+                  FrozenColumnCount="1" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Selected">
                     <DataGridTemplateColumn.CellTemplate>
@@ -29,11 +34,10 @@
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Album" Binding="{Binding Album}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="120" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Path" Binding="{Binding path}" Width="120" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="makeButton" Content="Make File" HorizontalAlignment="Left" Height="40" Margin="500,342,0,0" VerticalAlignment="Top" Width="145" Click="makeFile"/>
-        <Button Content="Spotify Mode" HorizontalAlignment="Left" Height="40" Margin="670,342,0,0" VerticalAlignment="Top" Width="97" Click="openSpotiWindow"/>
+        <Label x:Name="WelcomeText" Content="Select a directory to get started!" HorizontalAlignment="Center" Height="33" VerticalAlignment="Center" Width="224" FontWeight="Bold" Visibility="Visible"/>
 
         <Grid x:Name="LoadingOverlay" Background="#AF000000" Visibility="Collapsed" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
