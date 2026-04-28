@@ -37,7 +37,7 @@ namespace tagIndex {
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error Detected with this file: {ex}");
+                    MessageBox.Show($"Error in {file}. {ex.GetType().Name}: {ex.Message}");
                     continue;
                 }
 
