@@ -30,8 +30,9 @@ namespace SongTaggerGUI
             InitializeComponent();
             if (SpotiFechLib.APIStore.checkFile() == false)
             {
-                //Popup API Input Window
-                //Make sure the API key is good before continuing
+                APICollect apiW = new APICollect();
+                //apiW.Owner = this;
+                var result = apiW.ShowDialog();
             }
         }
 

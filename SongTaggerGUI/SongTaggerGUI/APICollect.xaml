@@ -1,0 +1,19 @@
+﻿<Window x:Class="SongTaggerGUI.APICollect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SongTaggerGUI"
+        mc:Ignorable="d"
+        Title="APICollect" Height="450" Width="450
+        "
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="To use spotify mode, you need an API key." HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="253" FontWeight="Bold" Margin="10,10,0,0"/>
+        <Label Content="Instructions:&#xA;Go to https://developer.spotify.com/dashboard&#xA;Click 'Create App' &#xA;Fill out with whatever you want, but check the Web API at the bottom&#xA;Set the Callback URL to http://127.0.0.1:5000/callback/&#xA;Then, when you finish, copy the Client ID and paste it below.&#xA;It will be safely stored on your computer, and you shouldn't have to do&#xA; this again.&#xD;&#xA;Then, go to user management, and add your name and email you &#xD;&#xA;use for your Spotify account. Then you will be all set!" Margin="10,30,10,198"/>
+        <Label Content="Client ID" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="76" Margin="10,241,0,0" FontWeight="Bold"/>
+        <TextBox x:Name ="keyBox" HorizontalAlignment="Left" Height="37" Margin="10,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414"/>
+        <Button x:Name="submitButton" Content="Submit" HorizontalAlignment="Center" Height="44" Margin="0,342,0,0" VerticalAlignment="Top" Width="285" Click="buttonClicked"/>
+
+    </Grid>
+</Window>
