@@ -30,16 +30,22 @@ namespace SongTaggerGUI
             SpotiFechLib.APIStore.writeFile(key);
             MessageBox.Show("Key Collected! Testing verifcation with spotify...");
 
-            try 
+            try
             {
-                await SpotiFechLib.SpotiLib.Auth(); 
+                await SpotiFechLib.SpotiLib.Auth();
+                DialogResult = true;
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Error: {ex.GetType().Name} | {ex.Message}");
             }
+        }
 
-            this.Close();
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Do not create a new MainWindow here.
+            // MainWindow is restored by the caller.
         }
     }
 }

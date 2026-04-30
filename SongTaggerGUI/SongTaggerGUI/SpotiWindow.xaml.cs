@@ -28,12 +28,6 @@ namespace SongTaggerGUI
         public SpotiWindow()
         {
             InitializeComponent();
-            if (SpotiFechLib.APIStore.checkFile() == false)
-            {
-                APICollect apiW = new APICollect();
-                //apiW.Owner = this;
-                var result = apiW.ShowDialog();
-            }
         }
 
         private void returnNormal(object sender, RoutedEventArgs e) 

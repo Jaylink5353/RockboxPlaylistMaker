@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:SongTaggerGUI"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="PlaylistInfo" Height="450" Width="500
+        Title="Rockbox Playlist Manager - Info" Height="450" Width="500
         ">
     <Grid>
         <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Height="24" Margin="28,10,0,0" TextWrapping="Wrap" Text="Playlist Fetched!" VerticalAlignment="Top" Width="208" FontWeight="Bold" />
         <DataGrid x:Name="songDataGrid"
-          Margin="24,56,25,99"
+          Margin="24,39,24,116"
           AutoGenerateColumns="False"
           CanUserAddRows="False"
           SelectionMode="Extended"

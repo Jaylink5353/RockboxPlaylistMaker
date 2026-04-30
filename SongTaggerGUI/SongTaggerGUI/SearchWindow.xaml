@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SongTaggerGUI"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SearchWindow" Height="300" Width="375">
+        Title="Rockbox Playlist Manager - Search Window" Height="300" Width="375">
     <Grid>
         <CheckBox x:Name="albumCheck" Content="Album" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="82" Margin="58,10,0,0" Checked="albumCheck_Checked" Unchecked="albumCheck_Unchecked"/>
         <CheckBox x:Name="artistCheck" Content="Artist" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="82" Margin="132,10,0,0" Checked="artistCheck_Checked" Unchecked="artistCheck_Unchecked"/>

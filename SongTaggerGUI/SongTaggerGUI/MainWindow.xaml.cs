@@ -90,9 +90,22 @@ namespace SongTaggerGUI
 
         private void openSpotiWindow(object sender, RoutedEventArgs e)
         {
-            SpotiWindow spotiWindow = new SpotiWindow();
+            if (!SpotiFechLib.APIStore.checkFile())
+            {
+                var apiCollect = new APICollect { Owner = this };
+                bool? apiResult = apiCollect.ShowDialog();
+
+                if (apiResult != true || !SpotiFechLib.APIStore.checkFile())
+                {
+                    Show();
+                    return;
+                }
+            }
+
+            var spotiWindow = new SpotiWindow { Owner = this };
+            Hide();
+            spotiWindow.Closed += (_, __) => Show();
             spotiWindow.Show();
-            this.Close();
         }
        
         public void SetCurrentSong(string input)
