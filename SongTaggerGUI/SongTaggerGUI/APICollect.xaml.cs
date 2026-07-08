@@ -26,7 +26,11 @@ namespace SongTaggerGUI
         private async void buttonClicked(object sender, RoutedEventArgs e)
         {
             string key = keyBox.Text;
-
+            if (key.IsWhiteSpace() || key == null)
+            {
+                MessageBox.Show("Please Provide an API Key or close this window.");
+                return;
+            }
             SpotiFechLib.APIStore.writeFile(key);
             MessageBox.Show("Key Collected! Testing verifcation with spotify...");
 
