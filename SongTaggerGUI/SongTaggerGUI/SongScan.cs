@@ -20,7 +20,7 @@ namespace tagIndex {
                 Console.WriteLine("Error: Not a valid path. Please try again.");
                 Environment.Exit(1);
             }
-            string[] allowedExtentions = { ".ogg", ".mp3", ".wav", ".flac" };
+            string[] allowedExtentions = { ".ogg", ".mp3", ".wav", ".flac", ".m4a" };
             string disallowedBegining = "._";
 
 
