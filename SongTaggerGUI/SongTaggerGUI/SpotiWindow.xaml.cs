@@ -39,6 +39,11 @@ namespace SongTaggerGUI
         }
         private async void fetchButtonClicked(object sender, RoutedEventArgs e)
         {
+            if (urlBox.Text.IsWhiteSpace() || urlBox.Text == null)
+            {
+                MessageBox.Show("Please Provide a spotify URL");
+                return;
+            }
             LoadingOverlay.Visibility = Visibility.Visible;
             LoadingCurrentFileTxt.Text = "Parsing Through Spotify Results...";
             string url = urlBox.Text;
